@@ -10,6 +10,28 @@ from transformers import (
     AutoModelForCausalLM,
 )
 
+'''
+python fewshot.py \
+  --amazon_train_csv amazon_train.csv \
+  --yelp_train_csv yelp_train.csv \
+  --input_csvs <INPUT_DATA_FILE_NAME>\
+  --output_dir <OUTPUT_DIRECTORY> \
+  --model_name google/flan-t5-large \
+  --model_type seq2seq \
+  --gpu_id <GPU_ID> \
+  --k_shot 3
+  
+python fewshot.py \
+  --amazon_train_csv amazon_train.csv \
+  --yelp_train_csv yelp_train.csv \
+  --input_csvs <INPUT_DATA_FILE_NAME> \
+  --output_dir <OUTPUT_DIRECTORY> \
+  --model_name mistralai/Mistral-7B-Instruct-v0.3 \
+  --model_type causal \
+  --gpu_id <GPU_ID> \
+  --k_shot 3
+'''
+
 STYLE_DESC = {
     "star1": "very negative review style",
     "star5": "very positive review style",
