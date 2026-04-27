@@ -6,6 +6,8 @@ Install the necessary dependencies to run the project.
 sh setup.sh
 ```
 
+<br>
+
 ### 📌 Model Training:
 
 - for Amazon dataset
@@ -39,7 +41,7 @@ python main.py \
   --gpu <DEVICE_ID>
 ```
 
-***
+<br>
 
 ### ⚙️ Pre-trained Models:
 You can download pre-trained weights to perform inference without training the model from scratch.
@@ -56,6 +58,7 @@ sh download_train.sh
 sh download_eval.sh
 ```
 
+<br>
 
 ### 📌 Model Inference:
 Perform inference to generate text with target styles using the trained model.
@@ -78,6 +81,8 @@ python main.py \
 --usage: source style
 
 --option: target style
+
+<br>
 
 ### 📌 Model Evaluation:
 Evaluate the performance of the generated text using various metrics (BLEU, BertScore, PPL).
