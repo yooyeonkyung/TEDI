@@ -1,1 +1,1 @@
-Due to file size limitations, the datasets are not included in this repository. Data will be made available on request.
+Due to file size limitations, training and validation datasets are not included in this repository. These data will be made available on request.
