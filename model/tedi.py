@@ -578,6 +578,7 @@ class TEDISentencewAdapter(nn.Module):
         self.eos_token_id = t5config.eos_token_id # 1
         self.pad_token_id = t5config.pad_token_id # 0
         
+        ## w/o discretizer 1
         self.vector_discretize = FeatureRefineOne(
             config, 
             t5config, 
@@ -665,7 +666,9 @@ class TEDISentencewAdapter(nn.Module):
         
         # get feature extracted vector <eos> from the sentence
         z_s = self.get_sentence_token(z_s, input_ids_s) # (B, D)
+        ## w/o discretizer 2
         z_sq, emb_loss, codebook, perplexity = self.vector_discretize(z_s)
+        ## w/o discretizer 3
         label_loss_2 = torch.mean(self.criterion(self.regression_head(z_sq), labels_s)) # (B, 5)
         z_sq = z_sq.unsqueeze(1) # (B, 1, D)
         

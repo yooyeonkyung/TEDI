@@ -20,6 +20,11 @@ def set_random_seed(random_seed, multi):
     if multi == True:
         torch.cuda.manual_seed_all(random_seed)
 
+def parse_gpu(value):
+    if "," in value:
+        return [int(x.strip()) for x in value.split(",") if x.strip()]
+    return int(value)
+
 
 def parse_arguments():
     """
@@ -67,8 +72,10 @@ def parse_arguments():
                         help="dimension of  the codebook (default: %(default)d)")
     parser.add_argument("--alpha", dest="ALPHA", type=float, default=1.0,
                         help="alpha value to be used in reconstruction loss (default: %(default)f)")
-    parser.add_argument("--beta", dest="BETA", type=float, default=1.0,
+    parser.add_argument("--beta", dest="BETA", type=float, default=0.25,
                         help="beta value to be used in label loss (default: %(default)f)")
+    parser.add_argument("--change_epoch", dest="CHANGE_EPOCH", type=float, default=9,
+                        help="epoch changed for the second phase (default: %(default)f)")
     parser.add_argument("--r", dest="R", type=int, default=1,
                         help="r value to be used in codebook (default: %(default)d)")
     parser.add_argument("--zc", dest="ZC", type=int, default=1,
@@ -86,8 +93,8 @@ def parse_arguments():
                     help="reconstruction learning rate to be used in 'train' mode (default: %(default)f)")
 
     # for multi-GPU
-    parser.add_argument("--gpu", dest="GPU", type=int, default=None,
-                        help="number of gpus using for training (default: %(default)d)")
+    parser.add_argument("--gpu", dest="GPU", type=parse_gpu, default=None,
+                        help="Number of GPUs or comma-separated device IDs using for training (e.g. 2 or 0,2)")
     # parser.add_argument("--ws", dest="WORLD_SIZE", type=int, default=1,
     #                     help="number of nodes for distributed training")
     
@@ -135,6 +142,7 @@ class Configs():
         self.r              = args.R
         self.zc             = args.ZC
         self.cycle          = args.CYCLE
+        self.change_epoch   = args.CHANGE_EPOCH
         
         self.root           = os.getcwd()
         self.datentime      = time.strftime("%y%m%d_%H%M", time.localtime())

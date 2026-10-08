@@ -120,7 +120,7 @@ class LightningTrainer(pl.LightningModule):
         self.alpha = ((self.config.epochs/step) - (self.current_epoch//step)) / (self.config.epochs/step) # 1
         rank_zero_only(print)(f"[EPOCH {self.current_epoch+1} | ALPHA VALUE]: {self.alpha}")
         
-        self.train_change_epoch = 9
+        self.train_change_epoch = self.config.change_epoch
         assert self.train_change_epoch != 0
         if self.config.debug == True:
             self.train_change_epoch = 0

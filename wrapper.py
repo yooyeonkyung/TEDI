@@ -73,7 +73,7 @@ def train_model(config):
         "model": config.model,
         "emb_dim": config.codebook_dim,
         "emb_num": config.codebook,
-        "beta": 0.25,
+        "beta": config.beta,
         "init_emb": None
         }
     
@@ -158,7 +158,7 @@ def test_model(config):
         "model": config.model,
         "emb_dim": config.codebook_dim,
         "emb_num": config.codebook,
-        "beta": 0.25,
+        "beta": config.beta,
         "init_emb": None
     }
     reg_model_params = {
